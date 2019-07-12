@@ -1,8 +1,8 @@
-# login-boilerplate
-Just clone and have a template done for logging in / registering.
+# rooms-boilerplate
+Just clone and have a template done for logging in / registering with ROOMS!
 
 # Note:
-css and js file are included for every ejs file, so be specific in your css / js code
+jquery is included twice, idk how to fix that, otherwise js file doesn't work with jquery.
 
 # Change:
 in config/keys.js -> games to your database name
