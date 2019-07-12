@@ -1,0 +1,71 @@
+header {
+    margin: 15px;
+    margin-bottom: 0;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+main {
+    margin: 15px;
+    display: flex;
+    flex-direction: column;
+}
+
+.join-create {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 15px;
+}
+
+.join-create>button {
+    margin: 0 10px;
+}
+
+.pre-game-main {
+    display: flex;
+}
+
+.rooms {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    width: 75%;
+}
+
+.rooms>div {
+    margin-bottom: 10px;
+    width: 30%;
+    display: flex;
+    flex-direction: column;
+}
+
+.rooms>div * {
+    text-align: center;
+}
+
+.online {
+    display: flex;
+    justify-content: center;
+    width: 25%;
+}
+
+@media (max-width: 800px) {
+    .pre-game-main {
+        flex-direction: column;
+    }
+
+    .rooms {
+        width: 100%;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .rooms>div {
+        width: 75%;
+    }
+
+    .online {
+        width: 100%;
+    }
+}
