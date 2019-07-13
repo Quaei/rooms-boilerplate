@@ -84,6 +84,10 @@ socket.on('roomExists', roomName => {
     alert(roomName + ' already exists.')
 })
 
+socket.on('gameIsAlreadyStarted', roomName => {
+    alert('Game in ' + roomName + ' is already started.')
+})
+
 socket.emit('newJoin', username)
 
 // displayings:
