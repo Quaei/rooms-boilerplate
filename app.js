@@ -118,7 +118,11 @@ io.on('connection', socket => {
     })
 
     socket.on('createRoomRequest', roomName => {
-        if (/^[A-za-z0-9]+$/.test(roomName)) {
+        let exists = false
+        rooms.forEach(room => {
+            if (room.name == roomName) exists = true
+        })
+        if (/^[A-za-z0-9]+$/.test(roomName) && !exists) {
             const newRoom = {
                 name: roomName,
                 players: 0,
@@ -129,7 +133,8 @@ io.on('connection', socket => {
             rooms.push(newRoom)
             io.emit('displayRooms', rooms)
         } else {
-            sockets[sockets.indexOf(socket)].emit('illegalRoomName')
+            if (!exists) sockets[sockets.indexOf(socket)].emit('illegalRoomName')
+            else sockets[sockets.indexOf(socket)].emit('roomExists', roomName)
         }
     })
 
