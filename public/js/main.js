@@ -80,6 +80,10 @@ socket.on('illegalRoomName', () => {
     alert('Room name can only contain letters and numbers.')
 })
 
+socket.on('roomExists', roomName => {
+    alert(roomName + ' already exists.')
+})
+
 socket.emit('newJoin', username)
 
 // displayings:
