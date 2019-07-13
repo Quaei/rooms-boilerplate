@@ -104,17 +104,25 @@ io.on('connection', socket => {
     })
 
     socket.on('joinRoomRequest', (roomName, name) => {
-        if (!roomName.gameStarted) {
-            const idx = players.map(e => e.name).indexOf(name)
-            const roomIdx = rooms.map(e => e.name).indexOf(roomName)
+        const idx = players.map(e => e.name).indexOf(name)
+        const roomIdx = rooms.map(e => e.name).indexOf(roomName)
+        if (!rooms[roomIdx].gameStarted) {
             sockets[idx].emit('joinApproved', roomName)
             rooms[roomIdx].players++
-            rooms[roomIdx].playersArr.push(name)
+            rooms[roomIdx].playersArr.push({
+                name: name,
+                status: 'not ready',
+                fontSize: (name.length < 12) ? '18.75px' : (name.length < 16) ? '15px' : '14px'                 
+            })
             players[idx].roomJoined = roomName
+            players[idx].status = 'in game'
 
             sockets[idx].join(roomName)
-            io.emit('displayRooms', rooms)
+            io.emit('displayRooms', rooms, roomIdx)
+            io.emit('displayPlayers', players)
+            io.in(roomName).emit('displayInGame', rooms[roomIdx].playersArr)
         }
+        else sockets[idx].emit('gameIsAlreadyStarted', roomName)
     })
 
     socket.on('createRoomRequest', roomName => {
